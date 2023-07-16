@@ -1,2 +1,0 @@
-gcc -Wall -Zomf -c -O2 simple.c -o simple.obj
-gcc -Zomf simple.obj simple.def -o simple.exe
