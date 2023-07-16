@@ -1,7 +1,7 @@
 # DEV-SAMPLES-C-PM-Simple
 A Simple PM Window Sample
 
-![Simple ScreenShot](/Wiki/Simple_001.png)
+![Simple ScreenShot](/wiki/Simple_001.png)
 
 LICENSE
 ===============
