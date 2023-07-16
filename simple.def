@@ -1,0 +1,8 @@
+;-------------------------------------
+; SIMPLE.DEF module definition file
+;-------------------------------------
+
+NAME SIMPLE WINDOWAPI
+
+DESCRIPTION     '@#OS2World:1.01#@##1## 16 Jul 2023 20:00:00     ARCAOS-507::::::v1.01@@Simple PM Window'
+
