@@ -1,0 +1,15 @@
+/*********************************************************************
+ *
+ *  simple.rc - Resource script for Simple PM Window Demo
+ *
+ *  Binds the application icon to the frame window resource ID.
+ *  Compiled with the Watcom Resource Compiler (wrc):
+ *    wrc -r simple.rc -fo=simple.res
+ *    wrc simple.res simple.exe
+ *
+ *********************************************************************/
+
+#include <os2.h>
+#include "simple.h"
+
+ICON ID_WINDOW simple.ico

@@ -1,0 +1,16 @@
+# Build output directories
+bin-gcc/
+bin-ow/
+
+# Object files, maps, import libraries (if built in place)
+*.obj
+*.map
+*.bak
+*.exe
+*.res
+
+# Build logs
+compile-gcc.log
+compile-ow.log
+make.out
+*.log

@@ -1,0 +1,35 @@
+# makefile-gcc -- Build simple.exe with GCC 9.2 (bitwiseworks) for OS/2
+#
+# Usage:
+#   make -f makefile-gcc          build simple.exe
+#   make -f makefile-gcc clean    remove build artifacts
+#
+# Requires:
+#   GCC 9.2 (bitwiseworks) on the PATH
+#   wrc (Watcom Resource Compiler)
+#   EMXOMFLD_TYPE=WLINK and EMXOMFLD_LINKER=wl.exe  (set by compile-gcc.cmd)
+#
+# Outputs: bin-gcc/simple.exe
+
+SRC = src
+OUT = bin-gcc
+
+.PHONY: all clean
+
+all: $(OUT)/simple.exe
+
+# Compile
+$(OUT)/simple.obj: $(SRC)/simple.c $(SRC)/simple.h
+	gcc -Wall -Zomf -c -O2 -I$(SRC) -o $(OUT)/simple.obj $(SRC)/simple.c
+
+# Compile resources
+$(OUT)/simple.res: $(SRC)/simple.rc $(SRC)/simple.h $(SRC)/simple.ico
+	wrc -r -I$(SRC) $(SRC)/simple.rc -fo=$(OUT)/simple.res
+
+# Link EXE and bind resources
+$(OUT)/simple.exe: $(OUT)/simple.obj $(OUT)/simple.res $(SRC)/simple.def
+	gcc -Zomf -o $(OUT)/simple.exe $(OUT)/simple.obj $(SRC)/simple.def
+	wrc $(OUT)/simple.res $(OUT)/simple.exe
+
+clean:
+	rm -f $(OUT)/simple.exe $(OUT)/simple.obj $(OUT)/simple.res $(OUT)/simple.map

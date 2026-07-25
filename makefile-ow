@@ -1,0 +1,41 @@
+# makefile-ow -- Build simple.exe with OpenWatcom 2.0 for OS/2
+#
+# Usage:
+#   wmake -f makefile-ow          build simple.exe
+#   wmake -f makefile-ow clean    remove build artifacts
+#
+# Requires:
+#   OpenWatcom 2.0 (wcc386, wlink, wrc) on the PATH
+#
+# Outputs: bin-ow\simple.exe
+#
+# Notes:
+#   -bt=os2 : target OS/2
+#   -zq     : quiet mode (no banner)
+#   -Ot     : optimize for speed
+#   -w3     : warning level 3
+#   wlink is driven via src\simple-ow.lnk
+
+SRC = src
+OUT = bin-ow
+
+all : $(OUT)\simple.exe .SYMBOLIC
+
+# Compile
+$(OUT)\simple.obj : $(SRC)\simple.c $(SRC)\simple.h
+	wcc386 $(SRC)\simple.c -I=$(SRC) -bt=os2 -zq -Ot -w3 -fo=$(OUT)\simple.obj
+
+# Compile resources
+$(OUT)\simple.res : $(SRC)\simple.rc $(SRC)\simple.h $(SRC)\simple.ico
+	wrc -r -I=$(SRC) $(SRC)\simple.rc -fo=$(OUT)\simple.res
+
+# Link EXE via response file and bind resources
+$(OUT)\simple.exe : $(OUT)\simple.obj $(OUT)\simple.res $(SRC)\simple-ow.lnk
+	wlink @$(SRC)\simple-ow.lnk
+	wrc $(OUT)\simple.res $(OUT)\simple.exe
+
+clean : .SYMBOLIC
+	-del $(OUT)\simple.exe 2>nul
+	-del $(OUT)\simple.obj 2>nul
+	-del $(OUT)\simple.res 2>nul
+	-del $(OUT)\simple.map 2>nul

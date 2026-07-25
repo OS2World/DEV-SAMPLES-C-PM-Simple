@@ -1,0 +1,5 @@
+SYSTEM os2v2_pm
+NAME bin-ow/simple.exe
+FILE bin-ow/simple.obj
+OPTION DESCRIPTION '@#OS2World:1.03#@##1## 2026-07-24     ARCAOS-507::::::@@Simple PM Window'
+OPTION QUIET
